@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Dimensions, StyleSheet, Image } from 'react-native'
+import { Dimensions, Image, StyleSheet, View } from 'react-native'
 import PropTypes from 'prop-types'
 import ChatBubble from './components/ChatBubble'
 import Chat from './components/Chat'
@@ -31,7 +31,7 @@ export default class LiveChat extends Component {
 				props.bubble
 			) : (
 				<View style={this.styles.bubbleStyle}>
-					<Image source={chatIcon} style={this.styles.icon} />
+					<Image source={chatIcon} style={this.styles.icon}/>
 				</View>
 			),
 		}
@@ -483,7 +483,7 @@ export default class LiveChat extends Component {
 					headerText={this.getHeaderText()}
 				/>
 			),
-			<AuthWebView key="auth" />,
+			<AuthWebView key="auth"/>,
 		]
 	}
 }
@@ -494,6 +494,8 @@ LiveChat.propTypes = {
 	bubble: PropTypes.element,
 	bubbleColor: PropTypes.string,
 	bubbleStyles: PropTypes.object,
+	navBarStyle: PropTypes.object,
+	chatContainerStyle: PropTypes.object,
 	chatTitle: PropTypes.string,
 	greeting: PropTypes.string,
 	noAgents: PropTypes.string,
@@ -510,7 +512,8 @@ LiveChat.defaultProps = {
 		right: 12,
 	},
 	movable: true,
-	onLoaded: () => {},
+	onLoaded: () => {
+	},
 	group: 0,
 	chatTitle: 'Chat with us!',
 	greeting: 'Welcome to our LiveChat!\nHow may We help you?',

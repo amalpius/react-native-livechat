@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, Dimensions, Platform } from 'react-native'
+import { Dimensions, StyleSheet, Text } from 'react-native'
 import { View } from 'react-native-animatable'
 import PropTypes from 'prop-types'
 import { GiftedChat } from 'react-native-gifted-chat'
@@ -42,6 +42,7 @@ export default class Chat extends React.Component {
 			chatTitle,
 			closeChat,
 			headerText,
+			navBarStyle,
 			...restProps
 		} = this.props
 		const isReconnecting = this.props.connectionState !== 'connected'
@@ -49,12 +50,13 @@ export default class Chat extends React.Component {
 			return (
 				<View
 					animation="fadeInUp"
-					style={styles.container}
+					style={this.props.chatContainerStyle ?
+						[styles.container, this.props.chatContainerStyle] : styles.container}
 					ref={(ref) => {
 						this.chat = ref
 					}}
 				>
-					<NavigationBar chatTitle={chatTitle} closeChat={closeChat} />
+					<NavigationBar chatTitle={chatTitle} closeChat={closeChat} navBarStyle={this.props.navBarStyle}/>
 					{isReconnecting && <Text style={styles.connectionStatus}>Reconnecting...</Text>}
 					{headerText && <Text style={styles.status}>{headerText}</Text>}
 					<GiftedChat
@@ -90,6 +92,7 @@ Chat.propTypes = {
 	onInputChange: PropTypes.func.isRequired,
 	isTyping: PropTypes.bool.isRequired,
 	connectionState: PropTypes.string.isRequired,
+	chatContainerStyle: PropTypes.object,
 }
 
 const styles = StyleSheet.create({
@@ -104,6 +107,8 @@ const styles = StyleSheet.create({
 		position: 'absolute',
 		top: 0,
 		left: 0,
+		elevation: 15,
+		zIndex: 15,
 		flexDirection: 'column',
 		backgroundColor: '#fff',
 	},

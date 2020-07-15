@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Dimensions, Text, StyleSheet, Image, TouchableOpacity, Platform } from 'react-native'
+import { Dimensions, Image, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import PropTypes from 'prop-types'
 
 const backImage = require('./../../assets/ios_back.png')
@@ -10,10 +10,10 @@ const totalSize = (num) => (Math.sqrt(height * height + width * width) * num) / 
 export default class NavigationBar extends Component {
 	render() {
 		return (
-			<View style={styles.navBar}>
+			<View style={this.props.navBarStyle ? [styles.navBar, this.props.navBarStyle] : styles.navBar}>
 				<Text style={styles.title}>{this.props.chatTitle}</Text>
 				<TouchableOpacity style={styles.back} onPress={this.props.closeChat}>
-					<Image key={Math.random()} source={backImage} style={styles.backIcon} resizeMode="stretch" />
+					<Image key={Math.random()} source={backImage} style={styles.backIcon} resizeMode="stretch"/>
 					<Text style={styles.backText}>Back</Text>
 				</TouchableOpacity>
 			</View>
@@ -27,7 +27,6 @@ const styles = StyleSheet.create({
 		backgroundColor: '#eee',
 		borderBottomColor: '#b2b2b2',
 		borderBottomWidth: 1,
-		elevation: 12,
 		flexDirection: 'row',
 		paddingTop: Platform.OS === 'ios' ? height / 25 : height / 40,
 	},
@@ -59,4 +58,5 @@ const styles = StyleSheet.create({
 NavigationBar.propTypes = {
 	closeChat: PropTypes.func.isRequired,
 	chatTitle: PropTypes.string.isRequired,
+	navBarStyle: PropTypes.object,
 }
