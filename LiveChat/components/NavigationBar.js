@@ -27,6 +27,7 @@ const styles = StyleSheet.create({
 		backgroundColor: '#eee',
 		borderBottomColor: '#b2b2b2',
 		borderBottomWidth: 1,
+		elevation: 12,
 		flexDirection: 'row',
 		paddingTop: Platform.OS === 'ios' ? height / 25 : height / 40,
 	},
